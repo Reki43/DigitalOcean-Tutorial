@@ -24,7 +24,7 @@ You will need a custom image like Arch Linux to upload to DigitalOcean. This all
 <img src='Pictures/Click manage on the left-hand side of the menu .jpg' alt='Picture of instruction' style='width: 50%;'>
 
 2. Select **Backups and Snapshots** from the **Manage** menu
-<img src='Pictures/Select Backups and Snapshots from the Manage menu.jpg' alt='Picture of instruction' style='width: 50%; height: 50%;'>
+<img src="Pictures/Select Backups and Snapshots from the Manage menu.jpg" alt="Description of instruction" style="width: 50%; height: 50%;" />
 
 3. Select **Custom Images**
 <img src='Pictures/Select Custom Images.jpg' alt='Picture of instruction' style='width: 50%;'>
