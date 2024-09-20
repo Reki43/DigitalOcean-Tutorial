@@ -21,24 +21,24 @@ This instruction manual is designed for term 2 CIT students, who want to set up 
 You will need a custom image like Arch Linux to upload to DigitalOcean. This allows you to create a Droplet with your preferred pre-installed operating system and configurations.
 
 1. Click **manage** on the left-hand side of the menu 
-<img src='Pictures/Click manage on the left-hand side of the menu .jpg' alt='Picture of instruction' style='width: 60%;'>
+<img src='Pictures/Click manage on the left-hand side of the menu .jpg' alt='Picture of instruction' style='width: 50%;'>
 
 2. Select **Backups and Snapshots** from the **Manage** menu
-<img src='Pictures/Select Backups and Snapshots from the Manage menu.jpg' alt='Picture of instruction' style='width: 60%;'>
+<img src='Pictures/Select Backups and Snapshots from the Manage menu.jpg' alt='Picture of instruction' style='width: 50%;'>
 
 3. Select **Custom Images**
-<img src='Pictures/Select Custom Images.jpg' alt='Picture of instruction' style='width: 60%;'>
+<img src='Pictures/Select Custom Images.jpg' alt='Picture of instruction' style='width: 50%;'>
 
 4. Select **Upload Image**
-<img src='Pictures/Select Upload Image.png' alt='Picture of instruction' style='width: 60%;'>
+<img src='Pictures/Select Upload Image.png' alt='Picture of instruction' style='width: 50%;'>
 
 5. Select **Arch Linux Image** and click **Open**
-<img src='Pictures/Select Arch Linux Image and click Open .jpg' alt='Picture of instruction' style='width: 60%;'>
+<img src='Pictures/Select Arch Linux Image and click Open .jpg' alt='Picture of instruction' style='width: 50%;'>
 
 6. Click on **Distribution** and from the drop-down list, select **Arch Linux**
-<img src='Pictures/Click on Distribution and from the drop-down list select Arch Linux.jpg' alt='Picture of instruction' style='width: 60%;'>
+<img src='Pictures/Click on Distribution and from the drop-down list select Arch Linux.jpg' alt='Picture of instruction' style='width: 50%;'>
 
 7. Select your closes region and Click **Upload Image**
-<img src='Pictures/Select your closes region and Click Upload Image.jpg' alt='Picture of instruction' style='width: 60%;'>
+<img src='Pictures/Select your closes region and Click Upload Image.jpg' alt='Picture of instruction' style='width: 50%;'>
 
 ## Creating an SSH Key Pair
