@@ -7,7 +7,7 @@ DigitalOcean is a cloud computing service. It offers you access to remote server
 This instruction manual is designed for term 2 CIT students, who want to set up a cloud-based server to host and manage websites or applications. The following steps will teach you how to create a Droplet using DigitalOcean's `doctl` command-line tool, configuring it with cloud-init, and connecting to it using SSH keys:
     
 1. Uploading a Custom Image onto DigitalOcean
-2. Creating an SSH Key Pair
+2. Creating a SSH Key Pair
 3. Adding the Public Key to Your DigitalOcean Account
 4. Installing and Configuring `doctl`
 5. Creating a Droplet with Cloud-init
@@ -73,4 +73,74 @@ Creating a SSH key pair allows you to securely connect to a remote server. It's 
 <img src='Pictures/Press Ctrl + V into the Public Key box and type a Key Name.jpg' style='width: 50%;'>
 
 
-## Creating a Droplet 
+## Installing `doctl` 
+
+1. Type the following into the **Terminal** to download **`doctl`**
+
+```bash
+Invoke-WebRequest https://github.com/digitalocean/doctl/releases/download/v1.110.0/doctl-1.110.0-windows-amd64.zip -OutFile ~\doctl-1.110.0-windows-amd64.zip
+Expand-Archive -Path ~\doctl-1.110.0-windows-amd64.zip
+```
+
+2. Extract the binary 
+
+```bash
+Expand-Archive -Path ~\doctl-1.110.0-windows-amd64.zip
+```
+
+3. Re-open and run your **Terminal** in **Administrator Mode** 
+
+4. Create a directory for `doctl` by typing the following:
+```bash
+New-Item -ItemType Directory $env:ProgramFiles\doctl\
+```
+
+5. Move the `doctl` binary to the new just created folder  by typing the following:
+```bash
+Move-Item -Path ~\doctl-1.110.0-windows-amd64\doctl.exe -Destination $env:ProgramFiles\doctl\
+```
+
+6. Add `doctl` to the System's PATH by typing the following:
+**Note:** This part is necessary to ensure that you can run `doctl` from any terminal session, regardless of your current directory.
+```bash
+[Environment]::SetEnvironmentVariable(
+    "Path",
+    [Environment]::GetEnvironmentVariable("Path",
+    [EnvironmentVariableTarget]::Machine) + ";$env:ProgramFiles\doctl\",
+    [EnvironmentVariableTarget]::Machine)
+```
+
+7. Reload PATH for current session by typing the following:
+```bash
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
+```
+
+## Creating an API token
+
+1. Click **API** on the left-hand side of the menu on DigitalOcean homepage
+<img src='Pictures/Click API on the left-hand side of the menu .jpg' style='width: 50%;'>
+
+2. Click **Generate New Token**
+3. Type a *Token Name*, give it **Full Access**, then click **Generate Token**
+<img src='Pictures/Type a Token Name and give it Full Access.jpg' style='width: 50%;'>
+
+4. **IMPORTANT:** Key is only shown once. Copy and paste the generated key somewhere safe. 
+
+## Granting Access to `doctl` using API Token
+
+1. Open **Terminal**
+2. Type the following command to grant `doctl` access to your DigitalOcean account:
+```bash
+doctl auth init --context personal
+```
+3. Copy and Paste your token access key into the terminal 
+<img src='Pictures/Copy and Paste your token access key into the terminal.jpg' style='width: 50%;'>
+**Note:** Make sure there's a blue checkmark beside **Validating token** to confirm it worked
+
+4. Type the following command to confirm you have successfully authorized `doctl`
+```bash
+doctl account get
+```
+<img src='Pictures/Type the following command to confirm you have succesffully authorized doctl.jpg' style='width: 50%;'>
+
+## Creating a Droplet with Cloud-init
