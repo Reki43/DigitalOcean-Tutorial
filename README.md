@@ -125,7 +125,7 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
 <img src='Pictures/Type a Token Name and give it Full Access.jpg' style='width: 50%;'>
 
 4. Copy and paste the generated token somewhere safe.
- 
+
 **IMPORTANT:** Token is only shown once! 
 
 ## Granting Access to `doctl` using API Token
@@ -148,4 +148,63 @@ doctl account get
 ```
 <img src='Pictures/Type the following command to confirm you have succesffully authorized doctl.jpg' style='width: 65%;'>
 
-## Creating a Droplet with Cloud-init
+
+## Configuring the Cloud-init File
+Cloud-init helps set up a Droplet automatically by using a YAML file. This file tells the server what name to use, what software to install, and what tasks to run, making setup faster and easier without needing to do everything manually. 
+
+1. Open **Notepad**
+2. Copy and paste the following into the blank page:
+
+```
+#cloud-config
+users:
+  - name: example-user
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_import_id:
+      - gh:<your-GitHub-username>
+disable_root: true
+packages:
+  - nginx
+runcmd:
+  - 'export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)'
+  - 'echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html'
+```
+
+3. Change **name** to your actual name
+4. Change `gh:<your-GitHub-username>` line with your actual GutHub username
+5. Click on **file** in the top left corner, then select **Save As**
+6. Click on the *Save as type** drop down and select **All files**
+7. Change *File name** to **"cloud-config.yaml"**, then click **Save** to your desired location
+
+
+## Deploying the Droplet with Cloud-init
+1. Open **Terminal**
+2. Type the following command, then locate your **ID** on the left side:
+```bash
+doctl compute ssh-key list
+```
+**Note:** Remember or note your ID somewhere for the next step
+
+3. Copy and paste the following into the **Terminal**:
+```
+doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 --ssh-keys git-user --user-data-file <path-to-your-cloud-init-file> --wait first-droplet second-droplet
+```
+
+4. Replace **git-user** with your **ID** number from step 2
+
+5. Replace **"path-to-your-cloud-init-file"** to the path location of your **cloud-config.yaml** file
+<img src='Pictures/Copy and paste the following into the Terminal.jpg' style='width: 65%;'>
+
+6. Press enter
+<img src='Pictures/end part.jpg' style='width: 65%;'>
+**Note:** May take a minute. If the output looks like the picture above, you have succesfully deployed your Droplets
+
+7. Type the following command to verify it worked:
+```bash
+ssh example-user@your-droplet-ip-address
+```
+**Note:** Change **"your-droplet-ip-address"** to the ip address of the droplet you want to connect. Can find your ip by typing the following command:
+```
+doctl compute droplet list
+```
