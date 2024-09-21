@@ -74,34 +74,33 @@ Creating a SSH key pair allows you to securely connect to a remote server. It's 
 
 
 ## Installing `doctl` 
+1. Open your **Terminal** in **Administrator Mode**
 
-1. Type the following into the **Terminal** to download **`doctl`**
+2. Type the following into the **Terminal** to download **`doctl`**
 
 ```bash
 Invoke-WebRequest https://github.com/digitalocean/doctl/releases/download/v1.110.0/doctl-1.110.0-windows-amd64.zip -OutFile ~\doctl-1.110.0-windows-amd64.zip
 Expand-Archive -Path ~\doctl-1.110.0-windows-amd64.zip
 ```
 
-2. Extract the binary 
+3. Type the following to extract the binary:
 
 ```bash
 Expand-Archive -Path ~\doctl-1.110.0-windows-amd64.zip
 ```
 
-3. Re-open and run your **Terminal** in **Administrator Mode** 
 
-4. Create a directory for `doctl` by typing the following:
+4. Create a new directory for `doctl` by typing the following:
 ```bash
 New-Item -ItemType Directory $env:ProgramFiles\doctl\
 ```
 
-5. Move the `doctl` binary to the new just created folder  by typing the following:
+5. Move the `doctl` binary to the new directory by typing the following:
 ```bash
 Move-Item -Path ~\doctl-1.110.0-windows-amd64\doctl.exe -Destination $env:ProgramFiles\doctl\
 ```
 
 6. Add `doctl` to the System's PATH by typing the following:
-**Note:** This part is necessary to ensure that you can run `doctl` from any terminal session, regardless of your current directory.
 ```bash
 [Environment]::SetEnvironmentVariable(
     "Path",
@@ -109,6 +108,7 @@ Move-Item -Path ~\doctl-1.110.0-windows-amd64\doctl.exe -Destination $env:Progra
     [EnvironmentVariableTarget]::Machine) + ";$env:ProgramFiles\doctl\",
     [EnvironmentVariableTarget]::Machine)
 ```
+**Note:** This part is necessary to ensure that you can run `doctl` from any terminal session, regardless of your current directory.
 
 7. Reload PATH for current session by typing the following:
 ```bash
@@ -121,10 +121,11 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
 <img src='Pictures/Click API on the left-hand side of the menu .jpg' style='width: 50%;'>
 
 2. Click **Generate New Token**
-3. Type a *Token Name*, give it **Full Access**, then click **Generate Token**
+3. Type a **Token Name**, give it **Full Access**, then click **Generate Token**
 <img src='Pictures/Type a Token Name and give it Full Access.jpg' style='width: 50%;'>
 
-4. **IMPORTANT:** Key is only shown once. Copy and paste the generated key somewhere safe. 
+4. Copy and paste the generated token somewhere safe. 
+**IMPORTANT:** Token is only shown once! 
 
 ## Granting Access to `doctl` using API Token
 
@@ -133,14 +134,17 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
 ```bash
 doctl auth init --context personal
 ```
+**Note:** You can change the name to anything after **--context**. I just named it **"personal"**
+
 3. Copy and Paste your token access key into the terminal 
 <img src='Pictures/Copy and Paste your token access key into the terminal.jpg' style='width: 50%;'>
 **Note:** Make sure there's a blue checkmark beside **Validating token** to confirm it worked
+
 
 4. Type the following command to confirm you have successfully authorized `doctl`
 ```bash
 doctl account get
 ```
-<img src='Pictures/Type the following command to confirm you have succesffully authorized doctl.jpg' style='width: 50%;'>
+<img src='Pictures/Type the following command to confirm you have succesffully authorized doctl.jpg' style='width: 65%;'>
 
 ## Creating a Droplet with Cloud-init
