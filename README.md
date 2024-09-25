@@ -196,7 +196,7 @@ doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 
 5. Replace **"path-to-your-cloud-init-file"** to the path location of your **cloud-config.yaml** file
 <img src='Pictures/Copy and paste the following into the Terminal.jpg' style='width: 65%;'>
 
-6. Press enter
+6. Press **enter**
 <img src='Pictures/end part.jpg' style='width: 65%;'>
 **Note:** May take a minute. If the output looks like the picture above, you have succesfully deployed your Droplets
 
@@ -204,7 +204,27 @@ doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 
 ```bash
 ssh example-user@your-droplet-ip-address
 ```
-**Note:** Change **"your-droplet-ip-address"** to the ip address of the droplet you want to connect. Can find your ip by typing the following command:
+**Note:** Change **"your-droplet-ip-address"** to the IP address of the droplet you want to connect. Can find your IP by typing the following command:
 ```
 doctl compute droplet list
 ```
+
+**Note:** It is succesful if your terminal promots `example-user@first-droplet:~$`
+
+
+# References
+
+*How to automate droplet setup with cloud-init*. DigitalOcean . (n.d.). 
+  https://docs.digitalocean.com/products/droplets/how-to/automate-setup-with-cloud-init/ 
+
+*How to create a personal access token*. DigitalOcean . (n.d.). 
+  https://docs.digitalocean.com/reference/api/create-personal-access-token/ 
+
+*How to install and configure doctl*. DigitalOcean . (n.d.). 
+  https://docs.digitalocean.com/reference/doctl/how-to/install/ 
+
+McNinch, N. (2024). Week 2 ACIT 2420: *Create an SSH key pair to authenticate and connect to a DigitalOcean droplet*. 
+  [Lecture Notes]. BCIT. https://gitlab.com/cit2420/2420-notes-f24/-/blob/main/2420-notes/week-two.md
+
+
+
