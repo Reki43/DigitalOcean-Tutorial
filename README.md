@@ -198,6 +198,7 @@ doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 
 
 6. Press **enter**
 <img src='Pictures/end part.jpg' style='width: 65%;'>
+
 **Note:** May take a minute. If the output looks like the picture above, you have succesfully deployed your Droplets
 
 7. Type the following command to verify it worked:
@@ -209,7 +210,7 @@ ssh example-user@your-droplet-ip-address
 doctl compute droplet list
 ```
 
-**Note:** It is succesful if your terminal promots `example-user@first-droplet:~$`
+**Note:** It is succesful if your terminal prompts `example-user@first-droplet:~$`
 
 
 # References
@@ -223,7 +224,7 @@ doctl compute droplet list
 *How to install and configure doctl*. DigitalOcean . (n.d.). 
   https://docs.digitalocean.com/reference/doctl/how-to/install/ 
 
-McNinch, N. (2024). Week 2 ACIT 2420: *Create an SSH key pair to authenticate and connect to a DigitalOcean droplet*. 
+McNinch, N. (2024). *Week 2 ACIT 2420: Create an SSH key pair to authenticate and connect to a DigitalOcean droplet*. 
   [Lecture Notes]. BCIT. https://gitlab.com/cit2420/2420-notes-f24/-/blob/main/2420-notes/week-two.md
 
 
