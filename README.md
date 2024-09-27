@@ -141,7 +141,7 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
 3. Type a **Token Name**, give it **Full Access**, then click **Generate Token**
 <img src='Pictures/Type a Token Name and give it Full Access.jpg' style='width: 50%;'>
 
-4. Copy and paste the generated token somewhere safe.
+4. Copy, paste, and save the generated token somewhere safe.
 
 **IMPORTANT:** Token is only shown once! 
 
