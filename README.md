@@ -23,7 +23,8 @@ This instruction manual is designed for term 2 CIT students, who want to set up 
 
 You will need a custom image like Arch Linux to upload to DigitalOcean. This allows you to create a Droplet with your preferred pre-installed operating system and configurations.
 
-1. Click **manage** on the left-hand side of the menu 
+1. Click **manage** on the left-hand side of the menu
+<br><br>
 ![click manage](./Pictures/Click%20manage%20on%20the%20left-hand%20side%20of%20the%20menu%20.jpg)
 
 2. Select **Backups and Snapshots** from the **Manage** menu
