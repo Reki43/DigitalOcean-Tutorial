@@ -45,6 +45,7 @@ You will need a custom image like Arch Linux to upload to DigitalOcean. This all
 
 
 7. Select your closes region and Click **Upload Image**
+<br></br>
 ![Upload Image](./Pictures/Select%20your%20closes%20region%20and%20Click%20Upload%20Image.jpg)
 
 
@@ -146,7 +147,6 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
 ## Creating an API token
 
 1. Click **API** on the left-hand side of the menu on DigitalOcean homepage
-
 ![API on menu](./Pictures/Click%20API%20on%20the%20left-hand%20side%20of%20the%20menu%20.jpg)
 
 
