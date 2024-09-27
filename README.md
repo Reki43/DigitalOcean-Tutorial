@@ -24,25 +24,25 @@ This instruction manual is designed for term 2 CIT students, who want to set up 
 You will need a custom image like Arch Linux to upload to DigitalOcean. This allows you to create a Droplet with your preferred pre-installed operating system and configurations.
 
 1. Click **manage** on the left-hand side of the menu 
-<img src='Pictures/Click manage on the left-hand side of the menu .jpg' alt='Picture of instruction' style='width: 60%;'>
+<img src='Pictures/Click manage on the left-hand side of the menu .jpg' alt='Picture of instruction' style='width: 50%;'>
 
 2. Select **Backups and Snapshots** from the **Manage** menu
-<img src="Pictures/Select Backups and Snapshots from the Manage menu.jpg" alt="Description of instruction" style="width: 60%;" />
+<img src="Pictures/Select Backups and Snapshots from the Manage menu.jpg" alt="Description of instruction" style="width: 50%;" />
 
 3. Select **Custom Images**
-<img src='Pictures/Select Custom Images.jpg' alt='Picture of instruction' style='width: 70%;'>
+<img src='Pictures/Select Custom Images.jpg' alt='Picture of instruction' style='width: 50%;'>
 
 4. Select **Upload Image**
-<img src='Pictures/Select Upload Image.png' alt='Picture of instruction' style='width: 100%;'>
+<img src='Pictures/Select Upload Image.png' alt='Picture of instruction' style='width: 80%;'>
 
 5. Select **Arch Linux Image** and click **Open**
-<img src='Pictures/Select Arch Linux Image and click Open .jpg' alt='Picture of instruction' style='width: 100%;'>
+<img src='Pictures/Select Arch Linux Image and click Open .jpg' alt='Picture of instruction' style='width: 80%;'>
 
 6. Click on **Distribution** and from the drop-down list, select **Arch Linux**
-<img src='Pictures/Click on Distribution and from the drop-down list select Arch Linux.jpg' alt='Picture of instruction' style='width: 50%;'>
+<img src='Pictures/Click on Distribution and from the drop-down list select Arch Linux.jpg' alt='Picture of instruction' style='width: 40%;'>
 
 7. Select your closes region and Click **Upload Image**
-<img src='Pictures/Select your closes region and Click Upload Image.jpg' alt='Picture of instruction' style='width: 50%;'>
+<img src='Pictures/Select your closes region and Click Upload Image.jpg' alt='Picture of instruction' style='width: 40%;'>
 
 ## Creating a SSH Key Pair
 Creating a SSH key pair allows you to securely connect to a remote server. It's more secure than using a password because the keys are much harder to get a hold of. The public key is stored on the server, and the private key stays on your computer, ensuring only you can access the server.
@@ -60,13 +60,13 @@ mkdir .ssh
 ```
 ls
 ```
-<img src='Pictures/Type ls to see if .ssh directory exists.jpg' alt='Picture of instruction' style='width: 70%;'>
+<img src='Pictures/Type ls to see if .ssh directory exists.jpg' alt='Picture of instruction' style='width: 50%;'>
 
 5. Type the following command below to create a new **SSH key pair**
 ```
 ssh-keygen -t ed25519 -f C:\Users\your-user-name\.ssh\do-key -C "youremail@email.com"
 ```
-<img src='Pictures/Type the following command below to create a new SSH key pair.jpg' alt='Picture of instruction' style='width: 100%;'>
+<img src='Pictures/Type the following command below to create a new SSH key pair.jpg' alt='Picture of instruction' style='width: 80%;'>
 
 **Note:** Change **your-user-name** to your displayed terminal name beside Users, and change and type **“youremail@email.com”** to your desired email address  
 
@@ -77,7 +77,7 @@ ssh-keygen -t ed25519 -f C:\Users\your-user-name\.ssh\do-key -C "youremail@email
 ```
 Get-Content C:\Users\your-user-name\.ssh\do-key.pub | Set-Clipboard
 ```
-<img src='Pictures/Copy and paste the following code below into the terminal to copy SSH key.jpg' alt='Picture of instruction' style='width: 100%;'>
+<img src='Pictures/Copy and paste the following code below into the terminal to copy SSH key.jpg' alt='Picture of instruction' style='width: 80%;'>
 
 **IMPORTANT:** Change the **“your-user-name"** part of the code to the username of the current user in the terminal.
 
@@ -85,10 +85,10 @@ Get-Content C:\Users\your-user-name\.ssh\do-key.pub | Set-Clipboard
 <img src='Pictures/Select Settings on the left-hand side of the menu in DigitalOcean.jpg' alt='Picture of instruction' style='width: 50%;'>
 
 3. Select **Security** and click on **Add SSH Key**
-<img src='Pictures/Select Security and click on Add SSH Key.jpg' alt='Picture of instruction' style='width: 100%;'>
+<img src='Pictures/Select Security and click on Add SSH Key.jpg' alt='Picture of instruction' style='width: 70%;'>
 
 4. Press **Ctrl + V** into the **Public Key** box and type a **Key Name**
-<img src='Pictures/Press Ctrl + V into the Public Key box and type a Key Name.jpg' style='width: 80%;'>
+<img src='Pictures/Press Ctrl + V into the Public Key box and type a Key Name.jpg' style='width: 60%;'>
 
 
 ## Installing `doctl` 
@@ -140,7 +140,7 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
 
 2. Click **Generate New Token**
 3. Type a **Token Name**, give it **Full Access**, then click **Generate Token**
-<img src='Pictures/Type a Token Name and give it Full Access.jpg' style='width: 70%;'>
+<img src='Pictures/Type a Token Name and give it Full Access.jpg' style='width: 50%;'>
 
 4. Copy and paste the generated token somewhere safe.
 
@@ -156,7 +156,7 @@ doctl auth init --context personal
 **Note:** You can change the name to anything after **--context**. I just named it **"personal"**
 
 3. Copy and Paste your token access key into the terminal 
-<img src='Pictures/Copy and Paste your token access key into the terminal.jpg' style='width: 80%;'>
+<img src='Pictures/Copy and Paste your token access key into the terminal.jpg' style='width: 70%;'>
 
 **Note:** Make sure there's a blue checkmark beside **Validating token** to confirm it worked 
 
@@ -164,7 +164,7 @@ doctl auth init --context personal
 ```bash
 doctl account get
 ```
-<img src='Pictures/Type the following command to confirm you have succesffully authorized doctl.jpg' style='width: 100%;'>
+<img src='Pictures/Type the following command to confirm you have succesffully authorized doctl.jpg' style='width: 80%;'>
 
 
 ## Configuring the Cloud-init File
@@ -223,10 +223,10 @@ doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 
 4. Replace **< git-user >** with your **ID** number from step 2
 
 5. Replace **< path-to-your-cloud-init-file >** to the path location of your **cloud-config.yaml** file
-<img src='Pictures/Copy and paste the following into the Terminal.jpg' style='width: 100%;'>
+<img src='Pictures/Copy and paste the following into the Terminal.jpg' style='width: 80%;'>
 
 6. Press **enter**
-<img src='Pictures/end part.jpg' style='width: 100%;'>
+<img src='Pictures/end part.jpg' style='width: 80%;'>
 
 **Note:** May take a minute. If the output looks like the picture above, you have succesfully deployed your Droplets
 
@@ -245,7 +245,7 @@ doctl compute droplet list
 ```
 
 10. Press **enter** 
-<img src='Pictures/Succesful login of droplet.jpg' style='width: 100%;'>
+<img src='Pictures/Succesful login of droplet.jpg' style='width: 80%;'>
 **Note:** You have succesfully connected to your droplet if your terminal prompts `[user@first-droplet:~]$`
 
 ## Installing and Configuring `doctl` in an Existing Droplet
@@ -281,7 +281,7 @@ doctl account get
 ```
 doctl compute droplet create <droplet-name> --size s-1vcpu-1gb --image <image-id> --region <region> --ssh-keys <your-ssh-key-id>
 ```
-<img src='Pictures/creating droplet using doctl.jpg' style='width: 100%;'>
+<img src='Pictures/creating droplet using doctl.jpg' style='width: 80%;'>
 
 **Note:** Ensure you replace `<your-existing-droplet-ip>`, `<droplet-name>`, `<image-id>`, `<region>`, and `<your-ssh-key-id>` with the values we did in the previous steps for your setup.
 
