@@ -28,6 +28,7 @@ You will need a custom image like Arch Linux to upload to DigitalOcean. This all
 ![click manage](./Pictures/Click%20manage%20on%20the%20left-hand%20side%20of%20the%20menu%20.jpg)
 
 2. Select **Backups and Snapshots** from the **Manage** menu
+<br><br>
 ![select backups and snapshots](./Pictures/Select%20Backups%20and%20Snapshots%20from%20the%20Manage%20menu.jpg)
 
 3. Select **Custom Images**
