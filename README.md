@@ -98,7 +98,6 @@ Get-Content C:\Users\your-user-name\.ssh\do-key.pub | Set-Clipboard
 
 ```bash
 Invoke-WebRequest https://github.com/digitalocean/doctl/releases/download/v1.110.0/doctl-1.110.0-windows-amd64.zip -OutFile ~\doctl-1.110.0-windows-amd64.zip
-Expand-Archive -Path ~\doctl-1.110.0-windows-amd64.zip
 ```
 
 3. Type the following to extract the binary:
