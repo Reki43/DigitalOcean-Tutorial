@@ -246,6 +246,7 @@ doctl compute droplet list
 
 10. Press **enter** 
 <img src='Pictures/Succesful login of droplet.jpg' style='width: 80%;'>
+
 **Note:** You have succesfully connected to your droplet if your terminal prompts `[user@first-droplet:~]$`
 
 ## Installing and Configuring `doctl` in an Existing Droplet
