@@ -98,6 +98,7 @@ sudo pacman -S doctl
 ## Creating an API token
 
 1. Click **API** on the left-hand side of the menu on DigitalOcean homepage
+<br></br>
 ![API on menu](./Pictures/Click%20API%20on%20the%20left-hand%20side%20of%20the%20menu%20.jpg)
 
 
@@ -197,7 +198,7 @@ runcmd:
 ```
 **Note:** The file creates a new user, installs nginx, which is a web server and reverse proxy, adds a public ssh key, and disables root access
 
-4. Click **i** on your keyboard to insert changes to the text file
+4. Press **i** on your keyboard to insert changes to the text file
 5. Change **name** to your actual name
 6. Change `<your public SSH Key>` line with your public SSH key
 7. Press **`shift + :`** and type **`wq`** to write, quit, and save your .yaml text file
@@ -210,9 +211,9 @@ doctl compute ssh-key list
 ```
 **Note:** Remember or note your **ID** somewhere for the next step
 
-3. Copy and paste the following into the **Terminal**:
+2. Copy and paste the following into the **Terminal**:
 ```
-doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 --ssh-keys < git-user > --user-data-file < path-to-your-cloud-init-file > --wait first-droplet 
+doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 --ssh-keys < git-user > --user-data-file < path-to-your-cloud-init-yaml-file > --wait first-droplet 
 ```
 
 **Note:** Use the following command to find Arch Linux image ID:
@@ -221,88 +222,42 @@ doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 
 doctl compute image list
 ```
 
-**Note:** Adding another name beside **--wait first-droplet** will create a "second-droplet"
+**Caution:** Adding another name beside **--wait first-droplet** will create a "second-droplet"
 
 
-4. Replace **< git-user >** with your **ID** number from step 2
+3. Replace **< git-user >** with your **ID** number from step 1
 
-5. Replace **< path-to-your-cloud-init-file >** to the path location of your **cloud-config.yaml** file
-
+4. Replace **< path-to-your-cloud-init-yaml-file >** to the path location of your **cloud-config.yaml** file
 ![yaml path command](./Pictures/Copy%20and%20paste%20the%20following%20into%20the%20Terminal.jpg)
 
-6. Press **enter**
-![End part of yaml file](./Pictures/end%20part.jpg)
+5. Press **enter**
+![End part of yaml file](./Pictures/creating%20droplet%20using%20doctl.jpg)
 
 **Note:** May take a minute. If the output looks like the picture above, you have succesfully deployed your Droplets
 
 
-7. Type the following command to verify it worked:
+6. Type the following command to verify it worked:
 ```
-ssh -i < /path/to/private-key > username@your-droplet-ip
+ssh -i < /path/to/private-key > root@your-droplet-ip
 ```
-8. Change **< /path/to/private-key >** to where your private key is and **username** as your user
+7. Change **< /path/to/private-key >** to where your private key is and **username** as your user
 
-9. Change **"your-droplet-ip"** to the IP address of the droplet you want to connect. 
+8. Change **"your-droplet-ip"** to the IP address of the droplet you want to connect. 
 
 **Note:** Can find your IP by typing the following command:
 ```
 doctl compute droplet list
 ```
 
-10. Press **enter** 
-![Succesful login of droplet](./Pictures/Succesful%20login%20of%20droplet.jpg)
+9. Press **enter** 
+![Succesful login of droplet](./Pictures/it%20worked!!.jpg)
 
-**Note:** You have succesfully connected to your droplet if your terminal prompts `[user@first-droplet:~]$`
-
-## Installing and Configuring `doctl` in an Existing Droplet
-
-1. Connect to your existing droplet from the previous step
-```
-ssh -i < /path/to/private-key > username@your-droplet-ip
-```
-
-2. Type the following command to update your package database:
-```
-sudo pacman -Syu
-```
-
-3. Install `doctl` with the following command:
-```
-sudo pacman -S doctl
-```
-
-4. Authenticate with DigitalOcean
-```
-doctl auth init
-```
-**Note:** There will be a prompt asking for your access token. Please remember where you saved it
-
-5. Verify `doctl` installation 
-```
-doctl account get
-```
-**IMPORTANT:** Make sure **status** is **active**
-
-6. Create a new droplet using `doctl` by typing the following command:
-```
-doctl compute droplet create <droplet-name> --size s-1vcpu-1gb --image <image-id> --region <region> --ssh-keys <your-ssh-key-id>
-```
-
-![New droplet photo](./Pictures/creating%20droplet%20using%20doctl.jpg)
-
-
-**Note:** Ensure you replace `<your-existing-droplet-ip>`, `<droplet-name>`, `<image-id>`, `<region>`, and `<your-ssh-key-id>` with the values we did in the previous steps for your setup.
-
-7. Connect to your new droplet
-```
-ssh -i < /path/to/private-key > username@your-droplet-ip
-```
-**Note:** Remember you can type the following command to find your **Public IPv4** address:
-```
-doctl compute droplet list
-```
+**Note:** You have succesfully connected to your droplet if your terminal prompts `[root@first-droplet:~]$`
 
 Congratulations! You just learned how to install and configure `doctl` in an existing droplet. Then used it to create a new droplet.
+
+
+
 
 
 # References
