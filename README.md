@@ -309,7 +309,8 @@ doctl compute droplet list
 >[!NOTE] 
 > You have succesfully connected to your droplet if your terminal prompts `[root@first-droplet:~]$`
 
-Congratulations! You just learned how to install and configure `doctl` in an existing droplet. Then used it to create a new droplet.
+> [!IMPORTANT] 
+> Congratulations! You just learned how to install and configure `doctl` in an existing droplet. Then used it to create a new droplet.
 
 ## Setting Up SSH Config File (Optional)
 1. In your terminal, type the following command in your Arch droplet:
