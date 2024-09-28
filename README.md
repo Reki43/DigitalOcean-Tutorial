@@ -246,7 +246,7 @@ Gives the user full sudo access without requiring a password.
 
 `export PUBLIC_IPV4=$(curl...):` Fetches the public IP address of the droplet.
 
-`echo Droplet... >` /var/www/html/index.html: Writes the hostname and public IP to the droplet's web page.
+`echo Droplet... > /var/www/html/index.html:` Writes the hostname and public IP to the droplet's web page.
 
 
 5. Change **name** to your actual name
