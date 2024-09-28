@@ -61,7 +61,7 @@ cd ~
 ```
 mkdir .ssh
 ```
-4. Type **ls** to see if **.ssh directory** exists
+4. Type **ls -a** to see if **.ssh directory** exists
 ```
 ls -a
 ```
@@ -86,7 +86,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/<key-name> -C "youremail@email.com"
 ```
 sudo pacman -Syu
 ```
-`**sudo pacman**`**:** A command used to install, update, or manage software packages on Arch Linux-based systems.
+**`sudo pacman`** **:** A command used to install, update, or manage software packages on Arch Linux-based systems.
 
 
 > [!NOTE] 
@@ -211,43 +211,44 @@ runcmd:
   - 'export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)'
   - 'echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html'
 ```
->[!NOTE]
+```
+Command Explained:
+ 
+`users:` Creates a user with the specified name and configuration.
 
-> `users:` Creates a user with the specified name and configuration.
-
->`name:` example-user:
+`name:` example-user:
 Sets the username to example-user.
 
->`shell: /bin/bash:`
+`shell: /bin/bash:`
 Specifies the default shell for the user (Bash).
 
->`sudo: ['ALL=(ALL) NOPASSWD:ALL']:`
+`sudo: ['ALL=(ALL) NOPASSWD:ALL']:`
 Gives the user full sudo access without requiring a password.
 
->`ssh_authorized_keys:` Adds your public SSH key for secure login to the droplet without a password.
+`ssh_authorized_keys:` Adds your public SSH key for secure login to the droplet without a password.
 
->`disable_root: true:` Disables root login for added security.
+`disable_root: true:` Disables root login for added security.
 
->`packages:` Installs the listed software packages:
+`packages:` Installs the listed software packages:
 
->`nginx:` A web server.
+`nginx:` A web server.
 
->`fd:` A faster file search tool.
+`fd:` A faster file search tool.
 
->`less:` A terminal pager for viewing files.
+`less:` A terminal pager for viewing files.
 
->`man-db:` Man page database for command documentation.
+`man-db:` Man page database for command documentation.
 
->`bash-completion:` Adds tab-completion for Bash commands.
+`bash-completion:` Adds tab-completion for Bash commands.
 
->`neovim:` A text editor.
+`neovim:` A text editor.
 
->`runcmd:` Runs commands after the droplet is created.
+`runcmd:` Runs commands after the droplet is created.
 
->`export PUBLIC_IPV4=$(curl...):` Fetches the public IP address of the droplet.
+`export PUBLIC_IPV4=$(curl...):` Fetches the public IP address of the droplet.
 
->`echo Droplet... >` /var/www/html/index.html: Writes the hostname and public IP to the droplet's web page.
-
+`echo Droplet... >` /var/www/html/index.html: Writes the hostname and public IP to the droplet's web page.
+```
 
 5. Change **name** to your actual name
 6. Change `<your public SSH Key>` line with your public SSH key
@@ -255,11 +256,11 @@ Gives the user full sudo access without requiring a password.
 
 
 ## Deploying the Droplet with Cloud-init
-1. Type the following command in your terminal, then locate your key **ID** on the left side:
+1. Type the following command in your terminal to view your list of ssh keys. Then locate your key **ID** on the left side:
 ```
 doctl compute ssh-key list
 ```
->[!NOTE]
+>[!IMPORTANT]
 > Remember or note your **ID** somewhere for the next step
 
 2. Copy and paste the following into the **Terminal**:
