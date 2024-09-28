@@ -8,8 +8,8 @@ This instruction manual is designed for term 2 CIT students, who want to set up 
     
 1. [Uploading a Custom Image onto DigitalOcean](#uploading-a-custom-image-onto-digitalocean)
 2. [Creating a SSH Key Pair](#creating-a-ssh-key-pair)
-3. [Adding the Public Key to Your DigitalOcean Account](#adding-the-public-key-to-your-digitalocean-account)
-4. [Installing `doctl`](#installing-doctl)
+3. [Installing `doctl`](#installing-doctl)
+4. [Adding the Public Key to your DigitalOcean Account](#adding-the-public-key-to-your-digitalocean-account)
 5. [Creating an API Token](#creating-an-api-token)
 6. [Granting Access to `doctl` using API Token](#granting-access-to-doctl-using-api-token)
 7. [Configuring the Cloud-init File](#configuring-the-cloud-init-file)
@@ -63,86 +63,37 @@ mkdir .ssh
 ```
 4. Type **ls** to see if **.ssh directory** exists
 ```
-ls
+ls -a
 ```
 ![Check if .ssh exist](./Pictures/Type%20ls%20to%20see%20if%20.ssh%20directory%20exists.jpg)
 
 
 5. Type the following command below to create a new **SSH key pair**
 ```
-ssh-keygen -t ed25519 -f C:\Users\your-user-name\.ssh\do-key -C "youremail@email.com"
+ssh-keygen -t ed25519 -f ~/.ssh/<key-name> -C "youremail@email.com"
 ```
 ![Command to create ssh key](./Pictures/Type%20the%20following%20command%20below%20to%20create%20a%20new%20SSH%20key%20pair.jpg)
 
+6. Change **your-user-name** to your displayed terminal name beside Users, and change and type **“youremail@email.com”** to your desired email address 
 
-**Note:** Change **your-user-name** to your displayed terminal name beside Users, and change and type **“youremail@email.com”** to your desired email address  
-
-
-## Adding the Public Key to your DigitalOcean Account
-
-1. Copy and paste the following code below into the terminal to copy SSH key 
-```
-Get-Content C:\Users\your-user-name\.ssh\do-key.pub | Set-Clipboard
-```
-![paste code into terminal to copy SSH key](./Pictures/Copy%20and%20paste%20the%20following%20code%20below%20into%20the%20terminal%20to%20copy%20SSH%20key.jpg)
-
-
-**IMPORTANT:** Change the **“your-user-name"** part of the code to the username of the current user in the terminal.
-
-2. Select **Settings** on the left-hand side of the menu in DigitalOcean
-![Click settings](./Pictures/Select%20Settings%20on%20the%20left-hand%20side%20of%20the%20menu%20in%20DigitalOcean.jpg)
-
-
-3. Select **Security** and click on **Add SSH Key**
-![Add SSH Key](./Pictures/Select%20Security%20and%20click%20on%20Add%20SSH%20Key.jpg)
-
-
-4. Press **Ctrl + V** into the **Public Key** box and type a **Key Name**
-![Paste public key](./Pictures/Press%20Ctrl%20+%20V%20into%20the%20Public%20Key%20box%20and%20type%20a%20Key%20Name.jpg)
-
-
+7. Change `<key-name>` to what ever you want to name the key file as
 
 
 ## Installing `doctl` 
-1. Open your **Terminal** in **Administrator Mode**
 
-2. Type the following into the **Terminal** to download **`doctl`**
-
-```bash
-Invoke-WebRequest https://github.com/digitalocean/doctl/releases/download/v1.110.0/doctl-1.110.0-windows-amd64.zip -OutFile ~\doctl-1.110.0-windows-amd64.zip
+1. Type the following into the **Terminal** to download **`doctl`**
+```
+sudo pacman -Syu
 ```
 
-3. Type the following to extract the binary:
+**Note:** This command updates the package database and upgrades all installed packages to the latest versions in Arch Linux.
 
-```bash
-Expand-Archive -Path ~\doctl-1.110.0-windows-amd64.zip
+
+3. Type the following to download `doctl`
+```
+sudo pacman -S doctl
 ```
 
-
-4. Create a new directory for `doctl` by typing the following:
-```bash
-New-Item -ItemType Directory $env:ProgramFiles\doctl\
-```
-
-5. Move the `doctl` binary to the new directory by typing the following:
-```bash
-Move-Item -Path ~\doctl-1.110.0-windows-amd64\doctl.exe -Destination $env:ProgramFiles\doctl\
-```
-
-6. Add `doctl` to the System's PATH by typing the following:
-```bash
-[Environment]::SetEnvironmentVariable(
-    "Path",
-    [Environment]::GetEnvironmentVariable("Path",
-    [EnvironmentVariableTarget]::Machine) + ";$env:ProgramFiles\doctl\",
-    [EnvironmentVariableTarget]::Machine)
-```
-**Note:** This part is necessary to ensure that you can run `doctl` from any terminal session, regardless of your current directory.
-
-7. Reload PATH for current session by typing the following:
-```bash
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
-```
 
 ## Creating an API token
 
@@ -160,8 +111,7 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
 
 ## Granting Access to `doctl` using API Token
 
-1. Open **Terminal**
-2. Type the following command to grant `doctl` access to your DigitalOcean account:
+1. Type the following command in the terminal to grant `doctl` access to your DigitalOcean account:
 ```bash
 doctl auth init --context personal
 ```
@@ -172,20 +122,59 @@ doctl auth init --context personal
 
 **Note:** Make sure there's a blue checkmark beside **Validating token** to confirm it worked 
 
-4. Type the following command to confirm you have successfully authorized `doctl`
-```bash
+4. Type the following command to switch context:
+```
+doctl auth switch --context < Your context name >
+```
+
+**Note:** The command switches the current settings in `doctl` to use a different context, letting you switch between different API tokens or configurations.
+
+
+5. Type the following command to confirm you have successfully authorized `doctl`
+```
 doctl account get
 ```
 
 ![Authorize doctl](./Pictures/Type%20the%20following%20command%20to%20confirm%20you%20have%20succesffully%20authorized%20doctl.jpg)
 
 
+## Adding the Public Key to your DigitalOcean Account
+
+1. Copy and paste the following code into the terminal to add SSH key to DigitalOcean 
+```
+ doctl compute ssh-key import "your-key-name" --public-key-file ~/.ssh/<key-name>.pub
+```
+
+**Note:** Replace `your-key-name` with any name you want the key to be named as 
+
+2. Change `~/.ssh/<key-name>` to where your public key is saved
+
+**Note:** This reads the content of your public key and passes it to the command. Therefore, creating a new SSH key on your DigitalOcean account.
+
+3. Verify key is added by typing the following command:
+```
+doctl compute ssh-key list
+```
+![Authorize doctl](./Pictures/Adding%20ssh%20to%20digitalocean%20using%20doctl.jpg)
+**Note:** If you see your named key, you have succesfully added your public key to DigitalOcean using `doctl`
+
 ## Configuring the Cloud-init File
 Cloud-init helps set up a Droplet automatically by using a YAML file. This file tells the server what name to use, what software to install, and what tasks to run, making setup faster and easier without needing to do everything manually. 
 
-1. Open **Notepad**
-2. Copy and paste the following into the blank page:
+1. Type the following comand to install Neovim:
+```
+sudo pacman -S neovim
+```
+**Note:** This command downloads Neovim, which is an open-source text editor designed for coding and editing task.
 
+2. Copy and paste the following command to launch and create your .yaml file:
+```
+nvim <your-cloud-config name>.yaml
+```
+![cloud-config with nvim](./Pictures/cloud-config%20with%20nvim.jpg)
+**Note:** Change `<your-cloud-config name>` to what ever you want your .yaml file name to be
+
+3. Copy and paste the following into the text-editor:
 ```
 #cloud-config
 users:
@@ -197,30 +186,26 @@ users:
 disable_root: true
 packages:
   - nginx
+  - fd
+  - less
+  - man-db
+  - bash-completion
+  - neovim
 runcmd:
   - 'export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)'
   - 'echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html'
 ```
 **Note:** The file creates a new user, installs nginx, which is a web server and reverse proxy, adds a public ssh key, and disables root access
 
-
-
-
-3. Change **name** to your actual name
-4. Change `<your public SSH Key>` line with your public SSH key
-
-**Note:** Refer back to [**Adding the Public Key to your DigitalOcean Account**](#adding-the-public-key-to-your-digitalocean-account), step 1 to get public SSH key.
-
-
-5. Click on **file** in the top left corner, then select **Save As**
-6. Click on the *Save as type** drop down and select **All files**
-7. Change *File name** to **"cloud-config.yaml"**, then click **Save** to your desired location
+4. Click **i** on your keyboard to insert changes to the text file
+5. Change **name** to your actual name
+6. Change `<your public SSH Key>` line with your public SSH key
+7. Press **`shift + :`** and type **`wq`** to write, quit, and save your .yaml text file
 
 
 ## Deploying the Droplet with Cloud-init
-1. Open **Terminal**
-2. Type the following command, then locate your key **ID** on the left side:
-```bash
+1. Type the following command in your terminal, then locate your key **ID** on the left side:
+```
 doctl compute ssh-key list
 ```
 **Note:** Remember or note your **ID** somewhere for the next step
@@ -228,6 +213,12 @@ doctl compute ssh-key list
 3. Copy and paste the following into the **Terminal**:
 ```
 doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 --ssh-keys < git-user > --user-data-file < path-to-your-cloud-init-file > --wait first-droplet 
+```
+
+**Note:** Use the following command to find Arch Linux image ID:
+
+```
+doctl compute image list
 ```
 
 **Note:** Adding another name beside **--wait first-droplet** will create a "second-droplet"
