@@ -72,6 +72,16 @@ ls -a
 ```
 ssh-keygen -t ed25519 -f ~/.ssh/<key-name> -C "youremail@email.com"
 ```
+**Code Explained:**
+
+`ssh-keygen:` Generates an SSH key pair.
+
+`-t ed25519:` Uses the ed25519 algorithm for the key.
+
+`-f ~/.ssh/<key-name>:` Saves the key to the specified file path.
+
+`-C "youremail@email.com":` Adds a comment, like your email to the key.
+
 ![Command to create ssh key](./Pictures/Type%20the%20following%20command%20below%20to%20create%20a%20new%20SSH%20key%20pair.jpg)
 
 6. Change **`<key-name>`** to what ever you want to name the key file as, and type **`“youremail@email.com”`** to your desired email address 
@@ -206,9 +216,6 @@ packages:
   - man-db
   - bash-completion
   - neovim
-runcmd:
-  - 'export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)'
-  - 'echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html'
 ```
 
 **Command Explained:**
@@ -242,11 +249,6 @@ Gives the user full sudo access without requiring a password.
 
 `neovim:` A text editor.
 
-`runcmd:` Runs commands after the droplet is created.
-
-`export PUBLIC_IPV4=$(curl...):` Fetches the public IP address of the droplet.
-
-`echo Droplet... > /var/www/html/index.html:` Writes the hostname and public IP to the droplet's web page.
 
 
 5. Change **name** to your actual name
