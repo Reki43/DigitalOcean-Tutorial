@@ -53,11 +53,11 @@ You will need a custom image like Arch Linux to upload to DigitalOcean. This all
 Creating a SSH key pair allows you to securely connect to a remote server. It's more secure than using a password because the keys are much harder to get a hold of. The public key is stored on the server, and the private key stays on your computer, ensuring only you can access the server.
 
 1. Open **Terminal**
-2. Type **cd~**
+2. Type **cd~** to change to root directory 
 ```
 cd ~
 ```
-3. Type **mkdir .ssh**
+3. Type **mkdir .ssh** to create a directory called **.ssh**
 ```
 mkdir .ssh
 ```
@@ -80,13 +80,17 @@ ssh-keygen -t ed25519 -f ~/.ssh/<key-name> -C "youremail@email.com"
 
 
 ## Installing `doctl` 
+`doctl` is used to manage DigitalOcean from the command line, making it faster and easier to create and control droplets. This saves time compared to using the web interface.
 
 1. Type the following into the **Terminal** to download **`doctl`**
 ```
 sudo pacman -Syu
 ```
+`**sudo pacman**`**:** A command used to install, update, or manage software packages on Arch Linux-based systems.
 
-**Note:** This command updates the package database and upgrades all installed packages to the latest versions in Arch Linux.
+
+> [!NOTE] 
+> This command updates the package database and upgrades all installed packages to the latest versions in Arch Linux.
 
 
 3. Type the following to download `doctl`
@@ -108,7 +112,8 @@ sudo pacman -S doctl
 
 4. Copy, paste, and save the generated token somewhere safe.
 
-**IMPORTANT:** Token is only shown once! 
+>[!IMPORTANT] 
+> Token is only shown once! 
 
 ## Granting Access to `doctl` using API Token
 
@@ -116,12 +121,15 @@ sudo pacman -S doctl
 ```bash
 doctl auth init --context personal
 ```
-**Note:** You can change the name to anything after **--context**. I just named it **"personal"**
+>[!NOTE] 
+> You can change the name to anything after **--context**. I just named it **"personal"**
 
 3. Copy and Paste your token access key into the terminal 
 ![token key into terminal](./Pictures/Copy%20and%20Paste%20your%20token%20access%20key%20into%20the%20terminal.jpg)
 
-**Note:** Make sure there's a blue checkmark beside **Validating token** to confirm it worked 
+
+> [!NOTE]
+> Make sure there's a blue checkmark beside **Validating token** to confirm it worked 
 
 4. Type the following command to switch context:
 ```
@@ -146,18 +154,21 @@ doctl account get
  doctl compute ssh-key import "your-key-name" --public-key-file ~/.ssh/<key-name>.pub
 ```
 
-**Note:** Replace `your-key-name` with any name you want the key to be named as 
+> [!NOTE] 
+> Replace `your-key-name` with any name you want the key to be named as 
 
 2. Change `~/.ssh/<key-name>` to where your public key is saved
 
-**Note:** This reads the content of your public key and passes it to the command. Therefore, creating a new SSH key on your DigitalOcean account.
+> [!NOTE] 
+> This reads the content of your public key and passes it to the command. Therefore, creating a new SSH key on your DigitalOcean account.
 
 3. Verify key is added by typing the following command:
 ```
 doctl compute ssh-key list
 ```
 ![Authorize doctl](./Pictures/Adding%20ssh%20to%20digitalocean%20using%20doctl.jpg)
-**Note:** If you see your named key, you have succesfully added your public key to DigitalOcean using `doctl`
+>[!NOTE]
+> If you see your named key, you have succesfully added your public key to DigitalOcean using `doctl`
 
 ## Configuring the Cloud-init File
 Cloud-init helps set up a Droplet automatically by using a YAML file. This file tells the server what name to use, what software to install, and what tasks to run, making setup faster and easier without needing to do everything manually. 
@@ -166,14 +177,16 @@ Cloud-init helps set up a Droplet automatically by using a YAML file. This file 
 ```
 sudo pacman -S neovim
 ```
-**Note:** This command downloads Neovim, which is an open-source text editor designed for coding and editing task.
+>[!NOTE] 
+> This command downloads Neovim, which is an open-source text editor designed for coding and editing task.
 
 2. Copy and paste the following command to launch and create your .yaml file:
 ```
 nvim <your-cloud-config name>.yaml
 ```
 ![cloud-config with nvim](./Pictures/cloud-config%20with%20nvim.jpg)
-**Note:** Change `<your-cloud-config name>` to what ever you want your .yaml file name to be
+>[!NOTE]
+> Change `<your-cloud-config name>` to what ever you want your .yaml file name to be
 
 4. Press **i** on your keyboard to insert changes to the text file
 
@@ -198,7 +211,43 @@ runcmd:
   - 'export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)'
   - 'echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html'
 ```
-**Note:** The file creates a new user, installs nginx, which is a web server and reverse proxy, adds a public ssh key, and disables root access
+>[!NOTE]
+
+> `users:` Creates a user with the specified name and configuration.
+
+>`name:` example-user:
+Sets the username to example-user.
+
+>`shell: /bin/bash:`
+Specifies the default shell for the user (Bash).
+
+>`sudo: ['ALL=(ALL) NOPASSWD:ALL']:`
+Gives the user full sudo access without requiring a password.
+
+>`ssh_authorized_keys:` Adds your public SSH key for secure login to the droplet without a password.
+
+>`disable_root: true:` Disables root login for added security.
+
+>`packages:` Installs the listed software packages:
+
+>`nginx:` A web server.
+
+>`fd:` A faster file search tool.
+
+>`less:` A terminal pager for viewing files.
+
+>`man-db:` Man page database for command documentation.
+
+>`bash-completion:` Adds tab-completion for Bash commands.
+
+>`neovim:` A text editor.
+
+>`runcmd:` Runs commands after the droplet is created.
+
+>`export PUBLIC_IPV4=$(curl...):` Fetches the public IP address of the droplet.
+
+>`echo Droplet... >` /var/www/html/index.html: Writes the hostname and public IP to the droplet's web page.
+
 
 5. Change **name** to your actual name
 6. Change `<your public SSH Key>` line with your public SSH key
@@ -210,20 +259,22 @@ runcmd:
 ```
 doctl compute ssh-key list
 ```
-**Note:** Remember or note your **ID** somewhere for the next step
+>[!NOTE]
+> Remember or note your **ID** somewhere for the next step
 
 2. Copy and paste the following into the **Terminal**:
 ```
 doctl compute droplet create --image 165064169 --size s-1vcpu-1gb --region sfo3 --ssh-keys < git-user > --user-data-file < path-to-your-cloud-init-yaml-file > --wait first-droplet 
 ```
-
-**Note:** Use the following command to find Arch Linux image ID:
+> [!NOTE] 
+> Use the following command to find Arch Linux image ID:
 
 ```
 doctl compute image list
 ```
 
-**Caution:** Adding another name beside **--wait first-droplet** will create a "second-droplet"
+>[!CAUTION] 
+> Adding another name beside **--wait first-droplet** will create a "second-droplet"
 
 
 3. Replace **< git-user >** with your **ID** number from step 1
@@ -233,8 +284,8 @@ doctl compute image list
 
 5. Press **enter**
 ![End part of yaml file](./Pictures/creating%20droplet%20using%20doctl.jpg)
-
-**Note:** May take a minute. If the output looks like the picture above, you have succesfully deployed your Droplets
+> [!NOTE] 
+> May take a minute. If the output looks like the picture above, you have succesfully deployed your Droplets
 
 
 6. Type the following command to verify it worked:
@@ -245,7 +296,8 @@ ssh -i < /path/to/private-key > root@your-droplet-ip
 
 8. Change **"your-droplet-ip"** to the IP address of the droplet you want to connect. 
 
-**Note:** Can find your IP by typing the following command:
+> [!NOTE] 
+> Can find your IP by typing the following command:
 ```
 doctl compute droplet list
 ```
@@ -253,7 +305,8 @@ doctl compute droplet list
 9. Press **enter** 
 ![Succesful login of droplet](./Pictures/it%20worked!!.jpg)
 
-**Note:** You have succesfully connected to your droplet if your terminal prompts `[root@first-droplet:~]$`
+>[!NOTE] 
+> You have succesfully connected to your droplet if your terminal prompts `[root@first-droplet:~]$`
 
 Congratulations! You just learned how to install and configure `doctl` in an existing droplet. Then used it to create a new droplet.
 
@@ -288,13 +341,13 @@ ssh `<Host name for connecting>`
 
 # References
 
-*How to automate droplet setup with cloud-init*.    DigitalOcean . (n.d.). 
+*How to automate droplet setup with cloud-init*.    DigitalOcean . (2022). 
   https://docs.digitalocean.com/products/droplets/how-to/automate-setup-with-cloud-init/ 
 
-*How to create a personal access token*. DigitalOcean . (n.d.). 
+*How to create a personal access token*. DigitalOcean . (2024). 
   https://docs.digitalocean.com/reference/api/create-personal-access-token/ 
 
-*How to install and configure doctl*. DigitalOcean . (n.d.). 
+*How to install and configure doctl*. DigitalOcean . (2020). 
   https://docs.digitalocean.com/reference/doctl/how-to/install/ 
 
 McNinch, N. (2024). *Week 2 ACIT 2420: Create an SSH key pair to authenticate and connect to a DigitalOcean droplet*. 
