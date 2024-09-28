@@ -74,9 +74,8 @@ ssh-keygen -t ed25519 -f ~/.ssh/<key-name> -C "youremail@email.com"
 ```
 ![Command to create ssh key](./Pictures/Type%20the%20following%20command%20below%20to%20create%20a%20new%20SSH%20key%20pair.jpg)
 
-6. Change **your-user-name** to your displayed terminal name beside Users, and change and type **“youremail@email.com”** to your desired email address 
+6. Change **`<key-name>`** to what ever you want to name the key file as, and type **`“youremail@email.com”`** to your desired email address 
 
-7. Change `<key-name>` to what ever you want to name the key file as
 
 
 ## Installing `doctl` 
@@ -135,8 +134,8 @@ doctl auth init --context personal
 ```
 doctl auth switch --context < Your context name >
 ```
-
-**Note:** The command switches the current settings in `doctl` to use a different context, letting you switch between different API tokens or configurations.
+> [!NOTE] 
+> The command switches the current settings in `doctl` to use a different context, letting you switch between different API tokens or configurations.
 
 
 5. Type the following command to confirm you have successfully authorized `doctl`
@@ -211,8 +210,8 @@ runcmd:
   - 'export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)'
   - 'echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html'
 ```
-```
-Command Explained:
+
+**Command Explained:**
  
 `users:` Creates a user with the specified name and configuration.
 
@@ -248,7 +247,7 @@ Gives the user full sudo access without requiring a password.
 `export PUBLIC_IPV4=$(curl...):` Fetches the public IP address of the droplet.
 
 `echo Droplet... >` /var/www/html/index.html: Writes the hostname and public IP to the droplet's web page.
-```
+
 
 5. Change **name** to your actual name
 6. Change `<your public SSH Key>` line with your public SSH key
@@ -286,14 +285,14 @@ doctl compute image list
 5. Press **enter**
 ![End part of yaml file](./Pictures/creating%20droplet%20using%20doctl.jpg)
 > [!NOTE] 
-> May take a minute. If the output looks like the picture above, you have succesfully deployed your Droplets
+> May take a minute. If the output looks like the picture above, you have succesfully deployed your Droplet
 
 
 6. Type the following command to verify it worked:
 ```
 ssh -i < /path/to/private-key > root@your-droplet-ip
 ```
-7. Change **< /path/to/private-key >** to where your private key is and **username** as your user
+7. Change **< /path/to/private-key >** to where your private key is
 
 8. Change **"your-droplet-ip"** to the IP address of the droplet you want to connect. 
 
