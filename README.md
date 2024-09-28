@@ -14,7 +14,7 @@ This instruction manual is designed for term 2 CIT students, who want to set up 
 6. [Granting Access to `doctl` using API Token](#granting-access-to-doctl-using-api-token)
 7. [Configuring the Cloud-init File](#configuring-the-cloud-init-file)
 8. [Deploying the Droplet with Cloud-init](#deploying-the-droplet-with-cloud-init)
-9. [Installing and Configuring `doctl` in an Existing Droplet](#installing-and-configuring-doctl-in-an-existing-droplet)
+9. [Setting Up SSH Config File (Optional)](#setting-up-ssh-config-file-optional)
 
 
 # Instructions
@@ -175,6 +175,8 @@ nvim <your-cloud-config name>.yaml
 ![cloud-config with nvim](./Pictures/cloud-config%20with%20nvim.jpg)
 **Note:** Change `<your-cloud-config name>` to what ever you want your .yaml file name to be
 
+4. Press **i** on your keyboard to insert changes to the text file
+
 3. Copy and paste the following into the text-editor:
 ```
 #cloud-config
@@ -198,7 +200,6 @@ runcmd:
 ```
 **Note:** The file creates a new user, installs nginx, which is a web server and reverse proxy, adds a public ssh key, and disables root access
 
-4. Press **i** on your keyboard to insert changes to the text file
 5. Change **name** to your actual name
 6. Change `<your public SSH Key>` line with your public SSH key
 7. Press **`shift + :`** and type **`wq`** to write, quit, and save your .yaml text file
@@ -256,7 +257,32 @@ doctl compute droplet list
 
 Congratulations! You just learned how to install and configure `doctl` in an existing droplet. Then used it to create a new droplet.
 
+## Setting Up SSH Config File (Optional)
+1. In your terminal, type the following command in your Arch droplet:
+```
+nvim .ssh/config
+```
 
+2. Press **i** on your keyboard to start inserting text
+
+3. Copy and paste the following text into the text editor:
+```
+Host <name for connecting>
+    HostName <droplet IP Address>
+    User root
+    IdentityFile ~\.ssh\<private key>
+    PreferredAuthentications publickey
+```
+![Succesful login of droplet](./Pictures/config.jpg)
+**Note:** Type a host name for connecting, paste your host name droplet IP address, and type the name of your private key
+
+4. Press **`shift + :`** and type **`wq`** to write, quit, and save your text file in .ssh
+5. Connect to your droplet by typing the following:
+```
+ssh `<Host name for connecting>`
+```
+6. Change `<Host name for connecting>` to your config host name and press **enter**
+![Succesful login of droplet](./Pictures/it%20worked%202!!.jpg)
 
 
 
